@@ -14,7 +14,7 @@ from datetime import datetime
 import re
 import time
 
-def pllscrape(endfile, url, year):
+def pllscrape(url, year):
     """
     The scraping guts
     
@@ -103,7 +103,26 @@ def pllscrape(endfile, url, year):
 
     print(year, 'season data preview')
     print(df)
+    return df
 
+def writecsv(df, year, endfile):
+    """
+    A function that writes a CSV out
+
+    Parameters
+    ----------
+    df : pandas dataframe
+        A dataframe to write out to a CSV.
+    year : str
+        The four digit year or season indication.
+    endfile : str
+        A filepath where the file should end up.
+
+    Returns
+    -------
+    None.
+
+    """
     writeout = input('Write out CSV? [y/n] ')
     if writeout == 'Y' or writeout == 'y':
         df.to_csv(endfile + year + '.csv')
@@ -121,8 +140,19 @@ else:
     enddir = enddir
 endfile = enddir + 'pll_scrape' + dt_string + '_'
 
-pllscrape(endfile, "https://stats.premierlacrosseleague.com/player-table", '2020')
-pllscrape(endfile, "https://stats.premierlacrosseleague.com/player-table", '2019')
-pllscrape(endfile, "https://stats.premierlacrosseleague.com/player-table", '2019post')
+data2020 = pllscrape("https://stats.premierlacrosseleague.com/player-table", '2020')
+data2019 = pllscrape("https://stats.premierlacrosseleague.com/player-table", '2019')
+data2019post = pllscrape("https://stats.premierlacrosseleague.com/player-table", '2019post')
+
+alldf = pd.DataFrame()
+alldf = alldf.append(data2020, ignore_index = True)
+alldf = alldf.append(data2019, ignore_index = True)
+alldf = alldf.append(data2019post, ignore_index = True)
+
+writecsv(data2020, '2020', endfile)
+writecsv(data2019, '2019', endfile)
+writecsv(data2019post, '2019post', endfile)
+writecsv(alldf, 'all', endfile)
+
 
 print('All done!')
