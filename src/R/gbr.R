@@ -58,4 +58,4 @@ summary(forwmod$finalModel)
 
 # Generate gradient boosted modifier model
 gbmmod <- gbm(formula = (GB~Rank*GP*P*Sh), distribution = "poisson", data = pll, n.trees = 100, interaction.depth = 1, cv.folds = 1, verbose = TRUE, n.cores = numCores)
-mod
+

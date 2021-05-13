@@ -49,5 +49,9 @@ ggboxplot(pll, x = "G2", "SOG", add = "jitter")
 ggboxplot(pll, x = "A", "Sh", add = "jitter")
 ggboxplot(pll, x = "A", "SOG", add = "jitter")
 ggboxplot(pll, x = "Sh", "SOG", add = "jitter")
-# Carry out Friedman tests to determine all significant effects to continue with
-friedman.test(GB ~ Sh | GP, data = as.matrix(pll))
+
+## Determine interactions
+interactmod <- lm(GB ~ (GP + P + G1 + G2 + A + Sh + SOG)^2, data = pll)
+summary(interactmod)
+
+# USE P:G1, GP:G1 and G1:SOG
