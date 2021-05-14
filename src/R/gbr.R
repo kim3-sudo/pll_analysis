@@ -57,5 +57,19 @@ summary(backmod$finalModel)
 summary(forwmod$finalModel)
 
 # Generate gradient boosted modifier model
-gbmmod <- gbm(formula = (GB~Rank*GP*P*Sh), distribution = "poisson", data = pll, n.trees = 100, interaction.depth = 1, cv.folds = 1, verbose = TRUE, n.cores = numCores)
+# For interactions, use P:G1, GP:G1 and G1:SOG
+gbmmod <- gbm(formula = (GB ~ A + Sh + SOG + P + G1 + G2 + (P * G1) + (GP * G1) + (G1 * SOG)),
+              distribution = "poisson", 
+              data = pll,
+              n.trees = 100000,
+              interaction.depth = 5,
+              cv.folds = 10,
+              verbose = TRUE,
+              n.cores = numCores)
+summary(gbmmod)
+gbmmod
 
+interpmod <- glm(formula = (GB ~ A + Sh + SOG + P + G1 + G2 + (P * G1) + (GP * G1) + (G1 * SOG)),
+                 family = poisson(), 
+                 data = pll)
+summary(interpmod)

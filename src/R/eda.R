@@ -13,6 +13,15 @@ library(rstatix)
 # Load data
 pll <- readRDS(url('https://github.com/kim3-sudo/pll_analysis/blob/main/data/pll.RDS?raw=true'))
 
+# Simple stats
+favstats(pll$P)
+onlygbs <- filter(pll, GB != 0)
+favstats(onlygbs$P)
+gb2 <- filter(pll, GB >= 2)
+favstats(gb2$P)
+gb3 <- filter(pll, GB >= 3)
+favstats(gb3$P)
+
 # Determine possible interaction effects
 pllmod <- lm(GB ~ Pos * GP * P * G1 * G2 * A * Sh * SOG * TO * CT * Team, data = pll)
 interaction.plot(pll$GP, pll$Pos, pll$GB) # YES
