@@ -1,0 +1,54 @@
+{
+  "id": "4ca0a435-06ea-4655-ba02-2ba613abb65d",
+  "version": "2.0",
+  "name": "pll",
+  "url": "https://stats.premierlacrosseleague.com",
+  "tests": [{
+    "id": "9fede877-1d02-447a-8be6-3d6e8a520128",
+    "name": "selectSeason",
+    "commands": [{
+      "id": "087fdc1b-b8f4-4030-975a-ca39cf4d6117",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7aad3cb-4b05-46db-ace7-fa430d7920f8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "974x1160",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2607e016-0955-4e6e-bb88-30dd34e5e860",
+      "comment": "",
+      "command": "click",
+      "target": "id=year-select-outlined",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c65e9464-ec61-4752-8108-8ea07d3e6ac4",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//li[@data-value='2019']",
+      "targets": [
+        ["css=.MuiListItem-root:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='menu-']/div[3]/ul/li[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/ul/li[2]", "xpath:position"],
+        ["xpath=//li[contains(.,'2019')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "0fe7985e-a292-41f8-b220-f90a690f5801",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["9fede877-1d02-447a-8be6-3d6e8a520128"]
+  }],
+  "urls": ["https://stats.premierlacrosseleague.com/"],
+  "plugins": []
+}
